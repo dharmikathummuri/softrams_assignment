@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AppService } from "../app.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-members",
@@ -9,18 +9,38 @@ import { Router } from "@angular/router";
 })
 export class MembersComponent implements OnInit {
   members = [];
-
-  constructor(public appService: AppService, private router: Router) {}
+  newMember = {};
+  constructor(
+    public appService: AppService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.newMember = {
+        firstName: params["firstName"],
+        lastName: params["lastName"],
+        jobTitle: params["jobTitle"],
+        team: params["team"],
+        status: params["status"]
+      };
+    });
+  }
 
   ngOnInit() {
-    this.appService.getMembers().subscribe(members => (this.members = members));
+    this.appService.getMembers().subscribe(member => {
+      this.members = member;
+    });
   }
 
   goToAddMemberForm() {
-    console.log(`Hmmm...we didn't navigate anywhere`);
+    this.router.navigate(["/addMember"]);
   }
 
-  editMemberByID(id: number) {}
+  editMemberByID(id: number) {
+    console.log(id);
+  }
 
-  deleteMemberById(id: number) {}
+  deleteMemberById(id: number) {
+    console.log("am hereeein delete");
+  }
 }

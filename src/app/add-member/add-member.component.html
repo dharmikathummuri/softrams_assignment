@@ -1,0 +1,136 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="alert alert-success" *ngIf="success == true">
+    Successfully Added {{ angForm.firstName }} !!
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group col-sm-3 my-1">
+        <label class="col-md-6">First Name </label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          formControlName="firstName"
+          #firstName
+        />
+      </div>
+      <div
+        *ngIf="
+          angForm.controls['firstName'].invalid &&
+          (angForm.controls['firstName'].dirty ||
+            angForm.controls['firstName'].touched)
+        "
+        class="alert alert-danger col-sm-3 my-1"
+      >
+        <div *ngIf="angForm.controls['firstName'].errors.required">
+          First Name is required.
+        </div>
+      </div>
+
+      <div class="form-group col-sm-3 my-1">
+        <label class="col-md-6">Last Name</label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          formControlName="lastName"
+          #lastName
+        />
+      </div>
+      <div
+        *ngIf="
+          angForm.controls['lastName'].invalid &&
+          (angForm.controls['lastName'].dirty ||
+            angForm.controls['lastName'].touched)
+        "
+        class="alert alert-danger col-sm-3 my-1"
+      >
+        <div *ngIf="angForm.controls['lastName'].errors.required">
+          Last Name is required.
+        </div>
+      </div>
+
+      <div class="form-group col-sm-3 my-1">
+        <label class="col-md-6">Job Title </label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          formControlName="jobTitle"
+          #jobTitle
+        />
+      </div>
+      <div
+        *ngIf="
+          angForm.controls['jobTitle'].invalid &&
+          (angForm.controls['jobTitle'].dirty ||
+            angForm.controls['jobTitle'].touched)
+        "
+        class="alert alert-danger col-sm-3 my-1"
+      >
+        <div *ngIf="angForm.controls['jobTitle'].errors.required">
+          Job Title is required.
+        </div>
+      </div>
+
+      <div class="form-group col-sm-3 my-1">
+        <label class="col-md-6">Status </label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          formControlName="status"
+          #status
+        />
+      </div>
+      <div
+        *ngIf="
+          angForm.controls['status'].invalid &&
+          (angForm.controls['status'].dirty ||
+            angForm.controls['status'].touched)
+        "
+        class="alert alert-danger col-sm-3 my-1"
+      >
+        <div *ngIf="angForm.controls['status'].errors.required">
+          Job Title is required.
+        </div>
+      </div>
+
+      <div class="form-group col-sm-3 my-1">
+        <label class="col-md-4">Racing Team</label>
+        <input
+          type="text"
+          class="form-control mb-2"
+          formControlName="team"
+          #team
+        />
+      </div>
+      <div
+        *ngIf="
+          angForm.controls['team'].invalid &&
+          (angForm.controls['team'].dirty || angForm.controls['team'].touched)
+        "
+        class="alert alert-danger col-sm-3 my-1"
+      >
+        <div *ngIf="angForm.controls['team'].errors.required">
+          Price is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <button
+          (click)="
+            addMember(
+              firstName.value,
+              lastName.value,
+              jobTitle.value,
+              status.value,
+              team.value
+            )
+          "
+          [disabled]="angForm.pristine || angForm.invalid"
+          class="btn btn-primary"
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

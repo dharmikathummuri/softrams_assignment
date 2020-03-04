@@ -13,6 +13,8 @@ import { BannerComponent } from "./banner/banner.component";
 import { MemberDetailsComponent } from "./member-details/member-details.component";
 import { MembersComponent } from "./members/members.component";
 import { LoginComponent } from "./login/login.component";
+import { AddMemberComponent } from "./add-member/add-member.component";
+import { EditMemberComponent } from "./edit-member/edit-member.component";
 
 // We may be missing a route...
 const ROUTES = [
@@ -28,6 +30,14 @@ const ROUTES = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "addMember",
+    component: AddMemberComponent
+  },
+  {
+    path: "editMember",
+    component: EditMemberComponent
   }
 ];
 
@@ -38,7 +48,9 @@ const ROUTES = [
     BannerComponent,
     MemberDetailsComponent,
     MembersComponent,
-    LoginComponent
+    LoginComponent,
+    AddMemberComponent,
+    EditMemberComponent
   ],
   imports: [
     BrowserModule,

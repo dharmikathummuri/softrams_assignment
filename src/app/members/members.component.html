@@ -15,6 +15,8 @@
         <th>Job Title</th>
         <th>Racing Team</th>
         <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +27,24 @@
         <td>{{ member?.jobTitle }}</td>
         <td>{{ member?.team }}</td>
         <td>{{ member?.status }}</td>
+        <td>
+          <button
+            id="editMemberButton"
+            class="btn btn-primary"
+            (click)="editMemberByID(member.id)"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            id="deleteMemberButton"
+            class="btn btn-primary"
+            (click)="deleteMemberById(member.id)"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

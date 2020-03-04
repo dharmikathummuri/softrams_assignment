@@ -9,11 +9,12 @@ var nosniff = require("dont-sniff-mimetype");
 const request = require("request");
 
 const app = express();
-
+app.use("/headers", require("./routes/headers"));
 app.use(cors());
 app.use(express.static("assets"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/headers", require("./routes/headers"));
 app.disable("x-powered-by");
 app.use(xssFilter());
 app.use(nosniff());
@@ -47,7 +48,17 @@ app.get("/api/members", (req, res) => {
 app.get("/api/teams", (req, res) => {});
 
 // Submit Form!
-app.post("/api/addMember", (req, res) => {});
+
+app.post("/api/addMember", (req, res) => {
+  let data = {
+    url: "http://localhost:3000/members",
+    json: true,
+    body: req.body.memberForm
+  };
+  request.post(data, (err, response, body) => {
+    res.send(body);
+  });
+});
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/softrams-racing/index.html"));
