@@ -53,6 +53,11 @@ export class AppService {
         return data;
       });
   }
+  deleteMemberById(id) {
+    return this.http
+      .delete(`${this.api}/deleteMember/${id}`)
+      .pipe(catchError(this.handleError));
+  }
 
   getTeams() {}
 

@@ -25,11 +25,13 @@ export class MembersComponent implements OnInit {
       };
     });
   }
-
-  ngOnInit() {
+  getMembers() {
     this.appService.getMembers().subscribe(member => {
       this.members = member;
     });
+  }
+  ngOnInit() {
+    this.getMembers();
   }
 
   goToAddMemberForm() {
@@ -41,6 +43,9 @@ export class MembersComponent implements OnInit {
   }
 
   deleteMemberById(id: number) {
-    console.log("am hereeein delete");
+    this.appService.deleteMemberById(id).subscribe(() => {
+      alert("successfully deleted member");
+      this.getMembers();
+    });
   }
 }

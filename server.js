@@ -84,6 +84,16 @@ app.put("/api/editMember/:id", (req, res) => {
   });
 });
 
+app.delete("/api/deleteMember/:id", (req, res) => {
+  let memberId = req.params.id;
+  request.delete(
+    `http://localhost:3000/members/${memberId}`,
+    (err, response, body) => {
+      res.send(body);
+    }
+  );
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/softrams-racing/index.html"));
 });
