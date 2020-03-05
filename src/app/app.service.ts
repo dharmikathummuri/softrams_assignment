@@ -36,6 +36,23 @@ export class AppService {
         return data;
       });
   }
+  //return member by id
+  getMemberById(id) {
+    return this.http
+      .get(`${this.api}/getMember/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+  async editmember(memberForm) {
+    return this.http
+      .put(
+        `${this.api}/editMember/${memberForm.id}`,
+        { memberForm },
+        ParseHeaders
+      )
+      .subscribe(data => {
+        return data;
+      });
+  }
 
   getTeams() {}
 

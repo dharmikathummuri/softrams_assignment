@@ -37,7 +37,7 @@ export class MembersComponent implements OnInit {
   }
 
   editMemberByID(id: number) {
-    console.log(id);
+    this.router.navigate(["editMember/" + id]);
   }
 
   deleteMemberById(id: number) {

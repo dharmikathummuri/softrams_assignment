@@ -36,7 +36,7 @@ const ROUTES = [
     component: AddMemberComponent
   },
   {
-    path: "editMember",
+    path: "editMember/:id",
     component: EditMemberComponent
   }
 ];

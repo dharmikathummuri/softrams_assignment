@@ -44,6 +44,18 @@ app.get("/api/members", (req, res) => {
   });
 });
 
+app.get("/api/getMember/:id", (req, res) => {
+  let memberId = req.params.id;
+  request.get(
+    `http://localhost:3000/members/${memberId}`,
+    (err, response, body) => {
+      if (response.statusCode <= 500) {
+        res.send(body);
+      }
+    }
+  );
+});
+
 // TODO: Dropdown!
 app.get("/api/teams", (req, res) => {});
 
@@ -56,6 +68,18 @@ app.post("/api/addMember", (req, res) => {
     body: req.body.memberForm
   };
   request.post(data, (err, response, body) => {
+    res.send(body);
+  });
+});
+
+app.put("/api/editMember/:id", (req, res) => {
+  let memberId = req.params.id;
+  let data = {
+    url: `http://localhost:3000/members/${memberId}`,
+    json: true,
+    body: req.body.memberForm
+  };
+  request.put(data, (err, response, body) => {
     res.send(body);
   });
 });

@@ -3,7 +3,7 @@
     {{ title }}
   </div>
   <div class="alert alert-success" *ngIf="success == true">
-    Successfully Added {{ angForm.firstName }} !!
+    Successfully Added New Member !!
   </div>
   <div class="panel-body">
     <form [formGroup]="angForm" novalidate>
@@ -128,6 +128,7 @@
           "
           [disabled]="angForm.pristine || angForm.invalid"
           class="btn btn-primary"
+        >
           Add
         </button>
       </div>
