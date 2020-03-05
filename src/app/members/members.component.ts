@@ -41,11 +41,15 @@ export class MembersComponent implements OnInit {
   editMemberByID(id: number) {
     this.router.navigate(["editMember/" + id]);
   }
-
+  confirmDelete() {
+    let confirmation = confirm("Are you sure you want to delete this member?");
+    return confirmation ? true : false;
+  }
   deleteMemberById(id: number) {
-    this.appService.deleteMemberById(id).subscribe(() => {
-      alert("successfully deleted member");
-      this.getMembers();
-    });
+    if (this.confirmDelete()) {
+      this.appService.deleteMemberById(id).subscribe(() => {
+        this.getMembers();
+      });
+    }
   }
 }
