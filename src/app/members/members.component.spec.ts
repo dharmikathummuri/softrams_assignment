@@ -1,25 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MembersComponent } from './members.component';
+import { MembersComponent } from "./members.component";
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
-describe('MembersComponent', () => {
+describe("MembersComponent", () => {
   let component: MembersComponent;
   let fixture: ComponentFixture<MembersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MembersComponent],
-      imports: [HttpClientModule, RouterModule],
+      imports: [HttpClientModule, RouterModule, RouterTestingModule],
       providers: [
         {
-          provide: Router,
+          provide: [Router, ActivatedRoute],
           useClass: class {
-            navigate = jasmine.createSpy('navigate');
+            navigate = jasmine.createSpy("navigate");
           }
         }
       ]
@@ -32,7 +33,7 @@ describe('MembersComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

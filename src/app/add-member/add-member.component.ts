@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
 import { Router } from "@angular/router";
 import { AppService } from "../app.service";
 
@@ -11,8 +16,13 @@ import { AppService } from "../app.service";
 export class AddMemberComponent implements OnInit {
   title = "Add Member";
   success = false;
-  angForm: FormGroup;
-
+  angForm = new FormGroup({
+    firstName: new FormControl(),
+    lastName: new FormControl(),
+    jobTitle: new FormControl(),
+    status: new FormControl(),
+    team: new FormControl()
+  });
   constructor(
     private fb: FormBuilder,
     private router: Router,

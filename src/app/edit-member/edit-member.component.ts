@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AppService } from "../app.service";
 @Component({
@@ -10,7 +15,13 @@ import { AppService } from "../app.service";
 export class EditMemberComponent implements OnInit {
   title = "Add Member";
   success = false;
-  angForm: FormGroup;
+  angForm = new FormGroup({
+    firstName: new FormControl(),
+    lastName: new FormControl(),
+    jobTitle: new FormControl(),
+    status: new FormControl(),
+    team: new FormControl()
+  });
   id = "";
   formdata = {};
   constructor(
