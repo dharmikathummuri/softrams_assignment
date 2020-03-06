@@ -10,20 +10,26 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class MembersComponent implements OnInit {
   members = [];
   newMember = {};
+  userName: string;
   constructor(
     public appService: AppService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.route.queryParams.subscribe(params => {
-      this.newMember = {
-        firstName: params["firstName"],
-        lastName: params["lastName"],
-        jobTitle: params["jobTitle"],
-        team: params["team"],
-        status: params["status"]
-      };
-    });
+    this.userName = localStorage.getItem("username");
+    if (this.userName == "" || this.userName == undefined) {
+      this.router.navigate(["login"]);
+    } else {
+      this.route.queryParams.subscribe(params => {
+        this.newMember = {
+          firstName: params["firstName"],
+          lastName: params["lastName"],
+          jobTitle: params["jobTitle"],
+          team: params["team"],
+          status: params["status"]
+        };
+      });
+    }
   }
   getMembers() {
     this.appService.getMembers().subscribe(member => {

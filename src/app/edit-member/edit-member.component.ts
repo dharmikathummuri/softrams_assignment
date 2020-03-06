@@ -15,6 +15,7 @@ import { AppService } from "../app.service";
 export class EditMemberComponent implements OnInit {
   title = "Add Member";
   success = false;
+  userName: string;
   angForm = new FormGroup({
     firstName: new FormControl(),
     lastName: new FormControl(),
@@ -29,7 +30,12 @@ export class EditMemberComponent implements OnInit {
     private router: Router,
     private appService: AppService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.userName = localStorage.getItem("username");
+    if (this.userName == "" || this.userName == undefined) {
+      this.router.navigate(["login"]);
+    }
+  }
   createForm(formData) {
     this.angForm = this.fb.group({
       firstName: [formData.firstName, Validators.required],

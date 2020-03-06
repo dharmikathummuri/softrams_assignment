@@ -9,6 +9,7 @@ var nosniff = require("dont-sniff-mimetype");
 const request = require("request");
 
 const app = express();
+app.use(express.json());
 app.use("/headers", require("./routes/headers"));
 app.use(cors());
 app.use(express.static("assets"));
@@ -36,6 +37,8 @@ app.use(
   })
 );
 
+// Get all members
+
 app.get("/api/members", (req, res) => {
   request("http://localhost:3000/members", (err, response, body) => {
     if (response.statusCode <= 500) {
@@ -43,6 +46,8 @@ app.get("/api/members", (req, res) => {
     }
   });
 });
+
+// Get member with id
 
 app.get("/api/getMember/:id", (req, res) => {
   let memberId = req.params.id;
@@ -62,27 +67,57 @@ app.get("/api/teams", (req, res) => {});
 // Submit Form!
 
 app.post("/api/addMember", (req, res) => {
-  let data = {
-    url: "http://localhost:3000/members",
-    json: true,
-    body: req.body.memberForm
-  };
-  request.post(data, (err, response, body) => {
-    res.send(body);
-  });
+  const { firstName, lastName, jobTitle, status, team } = req.body.memberForm;
+  if (
+    firstName == "" ||
+    lastName == "" ||
+    jobTitle == "" ||
+    status == "" ||
+    team == ""
+  ) {
+    res.send({
+      message: "please fill out all the fields"
+    });
+  } else {
+    let data = {
+      url: "http://localhost:3000/members",
+      json: true,
+      body: req.body.memberForm
+    };
+    request.post(data, (err, response, body) => {
+      res.send(body);
+    });
+  }
 });
 
+// Edit member form
+
 app.put("/api/editMember/:id", (req, res) => {
-  let memberId = req.params.id;
-  let data = {
-    url: `http://localhost:3000/members/${memberId}`,
-    json: true,
-    body: req.body.memberForm
-  };
-  request.put(data, (err, response, body) => {
-    res.send(body);
-  });
+  const { firstName, lastName, jobTitle, status, team } = req.body.memberForm;
+  if (
+    firstName == "" ||
+    lastName == "" ||
+    jobTitle == "" ||
+    status == "" ||
+    team == ""
+  ) {
+    res.send({
+      message: "please fill out all the fields"
+    });
+  } else {
+    let memberId = req.params.id;
+    let data = {
+      url: `http://localhost:3000/members/${memberId}`,
+      json: true,
+      body: req.body.memberForm
+    };
+    request.put(data, (err, response, body) => {
+      res.send(body);
+    });
+  }
 });
+
+// Delete Member
 
 app.delete("/api/deleteMember/:id", (req, res) => {
   let memberId = req.params.id;
